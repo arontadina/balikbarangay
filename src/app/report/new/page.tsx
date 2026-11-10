@@ -102,13 +102,6 @@ export default function NewReportPage() {
       setError('Please choose your purok or describe a nearby landmark so staff can find the location.');
       return;
     }
-    if (!navigator.onLine) {
-      setError(
-        'You appear to be offline. Your text is saved on this device but has NOT been received by the barangay. Please try again when you have a connection.'
-      );
-      return;
-    }
-
     setBusy(true);
     try {
       const { data, error: err } = await supabase
@@ -151,7 +144,12 @@ export default function NewReportPage() {
       setHasDraft(false);
       setReceipt({ code: data.tracking_code, failedPhotos: failed });
     } catch (err: any) {
-      setError(err?.message ?? 'Could not submit. Your draft is still saved on this device.');
+      const msg = String(err?.message ?? '');
+      setError(
+        /fetch|network|failed to load/i.test(msg)
+          ? 'Could not reach the server. Your text is saved on this device but has NOT been received by the barangay. Please check your connection and try again.'
+          : `${msg || 'Could not submit.'} Your draft is still saved on this device.`
+      );
     } finally {
       setBusy(false);
     }
