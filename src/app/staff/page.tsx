@@ -3,6 +3,8 @@ import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import Shell, { Loading } from '@/components/Shell';
 import { Flag, PriorityBadge, StatusBadge } from '@/components/Badges';
+import Art from '@/components/Art';
+import { emptyScene } from '@/lib/art';
 import { useRequireAuth } from '@/components/AuthProvider';
 import { supabase } from '@/lib/supabase';
 import {
@@ -96,7 +98,7 @@ export default function StaffInboxPage() {
 
   return (
     <Shell title="Case inbox">
-      {error && <p className="rounded-lg bg-red-50 p-2 text-sm text-red-700">{error}</p>}
+      {error && <p className="rounded-lg bg-red-500/10 p-2 text-sm text-red-300">{error}</p>}
 
       <div className="grid grid-cols-4 gap-2 text-center">
         {[
@@ -152,7 +154,10 @@ export default function StaffInboxPage() {
       </div>
 
       {filtered.length === 0 ? (
-        <p className="card text-center text-sm text-slate-500">No cases match your filters.</p>
+        <div className="card text-center">
+          <Art svg={emptyScene()} className="mx-auto mb-2 w-44" />
+          <p className="text-sm text-slate-500">No cases match your filters.</p>
+        </div>
       ) : (
         <ul className="space-y-3">
           {filtered.map((c) => (

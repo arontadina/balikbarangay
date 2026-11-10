@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#0e7556',
+  themeColor: '#051332',
   width: 'device-width',
   initialScale: 1,
 };
@@ -21,6 +21,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body>
+        {!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ? (
+          <div className="bg-red-600 p-3 text-center text-sm text-white">
+            Setup incomplete: NEXT_PUBLIC_SUPABASE_URL and/or NEXT_PUBLIC_SUPABASE_ANON_KEY are
+            missing. Add them in Vercel → Settings → Environment Variables, then redeploy.
+          </div>
+        ) : null}
         <AuthProvider>{children}</AuthProvider>
         <RegisterSW />
       </body>

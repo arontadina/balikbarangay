@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Shell, { Loading } from '@/components/Shell';
 import { StatusBadge } from '@/components/Badges';
+import Art from '@/components/Art';
+import { emptyScene } from '@/lib/art';
 import { useRequireAuth } from '@/components/AuthProvider';
 import { supabase } from '@/lib/supabase';
 import { categoryLabel, fmtDate } from '@/lib/constants';
@@ -30,10 +32,11 @@ export default function MyReportsPage() {
 
   return (
     <Shell title="My reports">
-      {error && <p className="rounded-lg bg-red-50 p-2 text-sm text-red-700">{error}</p>}
+      {error && <p className="rounded-lg bg-red-500/10 p-2 text-sm text-red-300">{error}</p>}
 
       {cases.length === 0 ? (
         <div className="card text-center">
+          <Art svg={emptyScene()} className="mx-auto mb-2 w-48" />
           <p className="text-sm text-slate-600">You have not submitted any reports yet.</p>
           <Link href="/report/new" className="btn mt-4">
             Report a problem

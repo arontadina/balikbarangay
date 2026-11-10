@@ -2,25 +2,41 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  color-scheme: dark;
+}
+
 html,
 body {
-  background: #f6f8f7;
-  color: #1e293b;
+  background-color: #051332;
+  background-image: radial-gradient(circle at 100% 0%, rgba(229, 136, 64, 0.14), transparent 45%),
+    radial-gradient(circle at 0% 100%, rgba(106, 166, 255, 0.08), transparent 40%);
+  background-attachment: fixed;
+  color: #e8edf7;
   -webkit-tap-highlight-color: transparent;
+}
+
+/* Black / orange "road work" hazard stripe */
+.hazard {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    #051332 0 10px,
+    #e58840 10px 20px
+  );
 }
 
 @layer components {
   .card {
-    @apply rounded-2xl bg-white p-4 shadow-sm ring-1 ring-slate-200;
+    @apply rounded-2xl bg-white p-4 shadow-lg shadow-black/20 ring-1 ring-slate-200;
   }
   .btn {
-    @apply inline-flex items-center justify-center rounded-xl bg-brand-600 px-4 py-3 text-sm font-semibold text-white active:bg-brand-700 disabled:opacity-50;
+    @apply inline-flex items-center justify-center rounded-xl bg-brand-600 px-4 py-3 text-sm font-bold text-white active:bg-brand-700 disabled:opacity-50;
   }
   .btn-secondary {
-    @apply inline-flex items-center justify-center rounded-xl bg-white px-4 py-3 text-sm font-semibold text-slate-700 ring-1 ring-slate-300 active:bg-slate-50 disabled:opacity-50;
+    @apply inline-flex items-center justify-center rounded-xl bg-white px-4 py-3 text-sm font-semibold text-slate-700 ring-1 ring-slate-300 active:bg-slate-100 disabled:opacity-50;
   }
   .input {
-    @apply w-full rounded-xl border border-slate-300 bg-white px-3 py-3 text-base outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-100;
+    @apply w-full rounded-xl border border-slate-300 bg-white px-3 py-3 text-base text-slate-800 outline-none placeholder:text-slate-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/30;
   }
   .label {
     @apply mb-1 block text-sm font-medium text-slate-700;

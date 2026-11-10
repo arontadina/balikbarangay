@@ -386,8 +386,8 @@ function StaffPanel({
     <section className="space-y-4">
       <h3 className="pt-2 text-sm font-semibold uppercase tracking-wide text-slate-500">Staff actions</h3>
 
-      {error && <p className="rounded-lg bg-red-50 p-2 text-sm text-red-700">{error}</p>}
-      {ok && <p className="rounded-lg bg-green-50 p-2 text-sm text-green-800">{ok}</p>}
+      {error && <p className="rounded-lg bg-red-500/10 p-2 text-sm text-red-300">{error}</p>}
+      {ok && <p className="rounded-lg bg-green-500/10 p-2 text-sm text-green-300">{ok}</p>}
 
       {verifs.length > 0 && (
         <div className="card">

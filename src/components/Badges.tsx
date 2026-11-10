@@ -21,6 +21,6 @@ export function PriorityBadge({ priority }: { priority: string | null }) {
 }
 
 export function Flag({ children, tone = 'amber' }: { children: React.ReactNode; tone?: 'amber' | 'red' }) {
-  const c = tone === 'red' ? 'bg-red-50 text-red-700 ring-red-200' : 'bg-amber-50 text-amber-800 ring-amber-200';
+  const c = tone === 'red' ? 'bg-red-500/10 text-red-300 ring-red-400/30' : 'bg-amber-400/10 text-amber-200 ring-amber-400/30';
   return <span className={`inline-block rounded-full px-2 py-0.5 text-[11px] font-medium ring-1 ${c}`}>{children}</span>;
 }

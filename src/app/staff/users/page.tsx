@@ -53,8 +53,8 @@ export default function UsersPage() {
 
   return (
     <Shell title="Users & roles">
-      {error && <p className="rounded-lg bg-red-50 p-2 text-sm text-red-700">{error}</p>}
-      {msg && <p className="rounded-lg bg-green-50 p-2 text-sm text-green-800">{msg}</p>}
+      {error && <p className="rounded-lg bg-red-500/10 p-2 text-sm text-red-300">{error}</p>}
+      {msg && <p className="rounded-lg bg-green-500/10 p-2 text-sm text-green-300">{msg}</p>}
       <input className="input" placeholder="Search by name" value={q} onChange={(e) => setQ(e.target.value)} />
       <p className="text-xs text-slate-500">
         Give staff roles only to people the barangay has authorized. Role changes are restricted to

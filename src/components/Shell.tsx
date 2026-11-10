@@ -3,6 +3,8 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useAuth } from './AuthProvider';
 import { isStaff } from '@/lib/constants';
+import Art from './Art';
+import { stormCloud } from '@/lib/art';
 
 interface NavItem {
   href: string;
@@ -46,19 +48,25 @@ export default function Shell({ title, children }: { title: string; children: Re
 
   return (
     <div className="mx-auto flex min-h-screen max-w-2xl flex-col">
-      <header className="sticky top-0 z-10 flex items-center justify-between bg-brand-600 px-4 py-3 text-white">
-        <div>
-          <p className="text-[11px] uppercase tracking-wide text-brand-100">BalikBarangay</p>
-          <h1 className="text-lg font-semibold leading-tight">{title}</h1>
-        </div>
-        <button onClick={signOut} className="rounded-lg bg-white/15 px-3 py-1.5 text-xs font-medium">
-          Sign out
-        </button>
-      </header>
+      <div className="sticky top-0 z-10">
+        <header className="flex items-center justify-between bg-brand-600 px-4 py-3 text-white">
+          <div className="flex items-center gap-3">
+            <Art svg={stormCloud()} className="h-9 w-9 shrink-0" />
+            <div>
+              <p className="text-[11px] font-bold uppercase tracking-wide text-[#051332]/70">BalikBarangay</p>
+              <h1 className="text-lg font-extrabold leading-tight">{title}</h1>
+            </div>
+          </div>
+          <button onClick={signOut} className="rounded-lg bg-[#051332]/20 px-3 py-1.5 text-xs font-bold">
+            Sign out
+          </button>
+        </header>
+        <div className="hazard h-1.5" />
+      </div>
 
       <main className="flex-1 space-y-4 p-4 pb-28">{children}</main>
 
-      <nav className="fixed inset-x-0 bottom-0 z-10 border-t border-slate-200 bg-white">
+      <nav className="fixed inset-x-0 bottom-0 z-10 border-t-2 border-brand-600 bg-white">
         <div className="mx-auto flex max-w-2xl">
           {nav.map((n) => (
             <Link

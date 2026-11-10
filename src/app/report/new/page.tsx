@@ -6,6 +6,8 @@ import { useRequireAuth } from '@/components/AuthProvider';
 import { supabase } from '@/lib/supabase';
 import { CATEGORIES } from '@/lib/constants';
 import { compressImage } from '@/lib/image';
+import Art from '@/components/Art';
+import { roadClosedSign, successScene } from '@/lib/art';
 import type { Purok } from '@/lib/types';
 
 const DRAFT_KEY = 'balikbarangay_report_draft';
@@ -161,6 +163,7 @@ export default function NewReportPage() {
     return (
       <Shell title="Report received">
         <div className="card space-y-3 text-center">
+          <Art svg={successScene()} className="mx-auto w-52" />
           <p className="text-sm text-slate-600">Your tracking number</p>
           <p className="text-3xl font-bold tracking-wider text-brand-700">{receipt.code}</p>
           <p className="text-sm text-slate-600">
@@ -168,7 +171,7 @@ export default function NewReportPage() {
             will review it. This is not a guarantee of assistance.
           </p>
           {receipt.failedPhotos > 0 && (
-            <p className="rounded-lg bg-amber-50 p-2 text-sm text-amber-800">
+            <p className="rounded-lg bg-amber-400/10 p-2 text-sm text-amber-200">
               {receipt.failedPhotos} photo(s) could not be uploaded. Open the report and tell the
               barangay, or submit a new report with the photos.
             </p>
@@ -183,9 +186,12 @@ export default function NewReportPage() {
 
   return (
     <Shell title="New report">
-      <div className="rounded-xl bg-amber-50 p-3 text-xs text-amber-900 ring-1 ring-amber-200">
+      <div className="flex items-center gap-3 rounded-xl bg-amber-400/10 p-3 text-xs text-amber-200 ring-1 ring-amber-400/30">
+        <Art svg={roadClosedSign()} className="h-12 w-12 shrink-0" />
+        <span>
         In immediate danger? Call <strong>911</strong> or your barangay DRRM hotline first. This
         app is not an emergency dispatch service.
+        </span>
       </div>
 
       {hasDraft && (
@@ -271,11 +277,11 @@ export default function NewReportPage() {
           {files.length > 0 && (
             <ul className="mt-2 space-y-1 text-sm">
               {files.map((f, i) => (
-                <li key={i} className="flex items-center justify-between rounded-lg bg-slate-50 px-2 py-1">
+                <li key={i} className="flex items-center justify-between rounded-lg bg-slate-100 px-2 py-1">
                   <span className="truncate">{f.name}</span>
                   <button
                     type="button"
-                    className="ml-2 text-xs text-red-600"
+                    className="ml-2 text-xs text-red-400"
                     onClick={() => setFiles(files.filter((_, j) => j !== i))}
                   >
                     Remove
@@ -287,7 +293,7 @@ export default function NewReportPage() {
           <p className="mt-1 text-xs text-slate-500">Avoid photos showing faces or documents.</p>
         </div>
 
-        {error && <p className="rounded-lg bg-red-50 p-2 text-sm text-red-700">{error}</p>}
+        {error && <p className="rounded-lg bg-red-500/10 p-2 text-sm text-red-300">{error}</p>}
 
         <button className="btn w-full" disabled={busy}>
           {busy ? 'Sending…' : 'Submit report'}

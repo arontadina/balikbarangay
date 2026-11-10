@@ -5,6 +5,8 @@ import Shell from '@/components/Shell';
 import { useAuth } from '@/components/AuthProvider';
 import { supabase } from '@/lib/supabase';
 import { categoryLabel, statusInfo } from '@/lib/constants';
+import Art from '@/components/Art';
+import { iconStrip } from '@/lib/art';
 
 interface Row {
   label: string;
@@ -55,11 +57,17 @@ function Body() {
     });
   }, []);
 
-  if (error) return <p className="rounded-lg bg-red-50 p-2 text-sm text-red-700">{error}</p>;
+  if (error) return <p className="rounded-lg bg-red-500/10 p-2 text-sm text-red-300">{error}</p>;
   if (!data) return <p className="p-6 text-center text-sm text-slate-500">Loading…</p>;
 
   return (
     <>
+      <div className="card flex items-center gap-4">
+        <Art svg={iconStrip()} className="w-40 shrink-0" />
+        <p className="text-sm text-slate-600">
+          Every report counts. This page shows how the barangay is recovering, without revealing anyone&apos;s identity.
+        </p>
+      </div>
       <div className="grid grid-cols-2 gap-3">
         <div className="card text-center">
           <p className="text-3xl font-bold text-brand-700">{data.total}</p>

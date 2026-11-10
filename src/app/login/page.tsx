@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
 import { useAuth } from '@/components/AuthProvider';
+import Art from '@/components/Art';
+import { iconStrip } from '@/lib/art';
 
 export default function LoginPage() {
   const { session, loading } = useAuth();
@@ -55,7 +57,8 @@ export default function LoginPage() {
 
   return (
     <div className="mx-auto flex min-h-screen max-w-md flex-col justify-center p-6">
-      <h1 className="text-2xl font-bold text-brand-700">BalikBarangay</h1>
+      <Art svg={iconStrip()} className="mb-3 w-56" />
+      <h1 className="text-3xl font-extrabold text-brand-700">BalikBarangay</h1>
       <p className="mb-6 text-sm text-slate-600">
         {mode === 'signin' ? 'Sign in to continue' : 'Create a resident account'}
       </p>
@@ -89,8 +92,8 @@ export default function LoginPage() {
           />
         </div>
 
-        {error && <p className="rounded-lg bg-red-50 p-2 text-sm text-red-700">{error}</p>}
-        {notice && <p className="rounded-lg bg-green-50 p-2 text-sm text-green-800">{notice}</p>}
+        {error && <p className="rounded-lg bg-red-500/10 p-2 text-sm text-red-300">{error}</p>}
+        {notice && <p className="rounded-lg bg-green-500/10 p-2 text-sm text-green-300">{notice}</p>}
 
         <button className="btn w-full" disabled={busy}>
           {busy ? 'Please wait…' : mode === 'signin' ? 'Sign in' : 'Create account'}
